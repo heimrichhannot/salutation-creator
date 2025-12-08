@@ -1,0 +1,15 @@
+{
+    "name": "heimrichhannot/salutation-creator",
+    "description": "A php library to create salutations.",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Thomas Körner",
+            "email": "t.koerner@heimrich-hannot.de"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/translation-contracts": "^1 || ^2 || ^3"
+    }
+}
