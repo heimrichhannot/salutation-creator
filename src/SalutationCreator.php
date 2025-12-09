@@ -32,7 +32,7 @@ class SalutationCreator
             '%prefix_titles%' => $prefixTitles,
             '%suffix_titles%' => $suffixTitles,
             '%gender_name%' => $context->getGender()->build()->trans($this->translator),
-            '%gender%' => $context->getGender()->value,
+            '%gender%' => $context->getGender()->getKey(),
             '%name%' => $context->getName()->getFullName(),
             '%formal_name%' => $context->getName()->getFormalName(),
             '%given_name%' => $context->getName()->getGivenName(),
