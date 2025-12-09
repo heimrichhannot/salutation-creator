@@ -31,8 +31,8 @@ class Titles
     }
 
     /**
-     * @param string $value
      * @param array<string, array{0: class-string<AbstractTitle>, 1?: non-empty-list<string>}>|null $mapping Override the default string title mapping
+     *
      * @return AbstractTitle[]
      */
     public static function fromString(string $value, ?array $mapping = null): array

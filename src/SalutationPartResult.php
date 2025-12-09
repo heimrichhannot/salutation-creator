@@ -11,12 +11,13 @@ readonly class SalutationPartResult implements TranslatableInterface, \Stringabl
      * @param array<string,string|int|TranslatableInterface> $parameters
      */
     public function __construct(
-        private string  $message,
-        private array   $parameters = [],
+        private string $message,
+        private array $parameters = [],
         private ?string $domain = null,
         private ?string $fallback = null,
-        private bool    $doNotTranslate = false,
-    ) {}
+        private bool $doNotTranslate = false,
+    ) {
+    }
 
     public function __toString(): string
     {

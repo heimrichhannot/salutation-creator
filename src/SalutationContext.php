@@ -44,6 +44,7 @@ class SalutationContext
 
     /**
      * @param AbstractTitle[] $titles
+     *
      * @return $this
      */
     public function addTitles(array $titles): self
@@ -82,8 +83,7 @@ class SalutationContext
     public function setTranslationConfig(
         string $formatKey = self::TRANSLATION_DEFAULT_FORMAT_KEY,
         string $domain = self::TRANSLATION_DEFAULT_DOMAIN,
-    ): self
-    {
+    ): self {
         $this->translationFormat = $formatKey;
         $this->translationDomain = $domain;
 

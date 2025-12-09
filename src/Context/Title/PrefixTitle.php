@@ -9,7 +9,8 @@ class PrefixTitle extends AbstractTitle
 {
     public function __construct(
         private readonly string $title,
-    ) {}
+    ) {
+    }
 
     public function getPosition(): Position
     {

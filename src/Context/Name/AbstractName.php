@@ -13,17 +13,17 @@ abstract class AbstractName implements SalutationPartInterface
     }
 
     /**
-     * Return the full name, e.g. "John Doe"
+     * Return the full name, e.g. "John Doe".
      */
-    abstract function getFullName(): string;
+    abstract public function getFullName(): string;
 
     /**
      * Return the formal name, e.g. "Mr. Doe". Used for formal salutations.
      */
-    abstract function getFormalName(): string;
+    abstract public function getFormalName(): string;
 
     /**
      * Return the given name, e.g. "John". Used for informal salutations.
      */
-    abstract function getGivenName(): string;
+    abstract public function getGivenName(): string;
 }

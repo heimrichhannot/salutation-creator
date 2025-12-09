@@ -6,20 +6,21 @@ class GermanTypeName extends AbstractName
 {
     public function __construct(
         private readonly string $firstName,
-        private readonly string $lastName
-    ) {}
+        private readonly string $lastName,
+    ) {
+    }
 
-    function getFullName(): string
+    public function getFullName(): string
     {
         return $this->firstName . ' ' . $this->lastName;
     }
 
-    function getFormalName(): string
+    public function getFormalName(): string
     {
         return $this->lastName;
     }
 
-    function getGivenName(): string
+    public function getGivenName(): string
     {
         return $this->firstName;
     }

@@ -9,7 +9,8 @@ class SuffixTitle extends AbstractTitle
 {
     public function __construct(
         private readonly string $value,
-    ) {}
+    ) {
+    }
 
     public function getPosition(): Position
     {

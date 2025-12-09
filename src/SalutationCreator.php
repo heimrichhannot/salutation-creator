@@ -3,14 +3,14 @@
 namespace HeimrichHannot\SalutationCreator;
 
 use HeimrichHannot\SalutationCreator\Context\Position;
-use HeimrichHannot\SalutationCreator\Context\Title\AbstractTitle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SalutationCreator
 {
     public function __construct(
         private readonly TranslatorInterface $translator,
-    ) {}
+    ) {
+    }
 
     public function generate(SalutationContext $context): string
     {
@@ -43,12 +43,10 @@ class SalutationCreator
             $parameters,
             $context->getTranslationDomain()
         ));
-
     }
 
     /**
      * @param array<SalutationPartInterface|array<SalutationPartInterface>> $array
-     * @return string
      */
     private function buildString(array $array): string
     {
