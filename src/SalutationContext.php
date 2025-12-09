@@ -2,7 +2,8 @@
 
 namespace HeimrichHannot\SalutationCreator;
 
-use HeimrichHannot\SalutationCreator\Context\Gender;
+use HeimrichHannot\SalutationCreator\Context\Gender\Gender;
+use HeimrichHannot\SalutationCreator\Context\Gender\GenderInterface;
 use HeimrichHannot\SalutationCreator\Context\Name\AbstractName;
 use HeimrichHannot\SalutationCreator\Context\Title\AbstractTitle;
 
@@ -15,11 +16,11 @@ class SalutationContext
      * @var AbstractTitle[]
      */
     private array $titles = [];
-    private Gender $gender = Gender::DIVERSE;
+    private GenderInterface $gender = Gender::DIVERSE;
     private ?AbstractName $name = null;
 
     private string $translationFormat = self::TRANSLATION_DEFAULT_FORMAT_KEY;
-    private string $translationDomain = self::TRANSLATION_DEFAULT_FORMAT_KEY;
+    private string $translationDomain = self::TRANSLATION_DEFAULT_DOMAIN;
 
     public function hasTitle(): bool
     {
@@ -52,12 +53,12 @@ class SalutationContext
         return $this;
     }
 
-    public function setGender(Gender $gender): self
+    public function setGender(GenderInterface $gender): self
     {
         $this->gender = $gender;
     }
 
-    public function getGender(): Gender
+    public function getGender(): GenderInterface
     {
         return $this->gender;
     }

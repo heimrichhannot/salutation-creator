@@ -1,4 +1,4 @@
-format.formel: >
+format.formal: >
   {gender, select,
     m {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
     w {Sehr geehrte {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
