@@ -9,7 +9,7 @@ use HeimrichHannot\SalutationCreator\Context\Title\SuffixTitle;
 
 class Titles
 {
-    public static function defaultMap(): array
+    public static function defaultMapping(): array
     {
         return [
             'dr' => [GermanDoctorTitle::class],
@@ -29,16 +29,16 @@ class Titles
 
     /**
      * @param string $value
-     * @param array|null $map Override the default string title mapping
+     * @param array|null $mapping Override the default string title mapping
      * @return AbstractTitle[]
      */
-    public static function fromString(string $value, ?array $map = null): array
+    public static function fromString(string $value, ?array $mapping = null): array
     {
         if (!$value) {
             return [];
         }
 
-        $map = $map ?? self::defaultMap();
+        $mapping = $mapping ?? self::defaultMapping();
 
         $tokens = preg_split('/\s+/', trim($value)) ?: [];
         $titles = [];
@@ -46,15 +46,15 @@ class Titles
         foreach ($tokens as $token) {
             $key = rtrim(mb_strtolower($token), '.');
 
-            if (!isset($map[$key])) {
+            if (!isset($mapping[$key])) {
                 continue;
             }
 
-            if (!isset($map[$key][0]) || !($map[$key][0] instanceof AbstractTitle)) {
+            if (!isset($mapping[$key][0]) || !($mapping[$key][0] instanceof AbstractTitle)) {
                 continue;
             }
 
-            $titles[] = new $map[$key][0](...($map[$key][1] ?? []));
+            $titles[] = new $mapping[$key][0](...($mapping[$key][1] ?? []));
         }
 
         return $titles;

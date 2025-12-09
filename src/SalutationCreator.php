@@ -38,11 +38,11 @@ class SalutationCreator
             '%given_name%' => $context->getName()->getGivenName(),
         ];
 
-        return $this->translator->trans(
+        return trim($this->translator->trans(
             $context->getTranslationFormat(),
             $parameters,
             $context->getTranslationDomain()
-        );
+        ));
 
     }
 

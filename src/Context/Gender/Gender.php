@@ -24,7 +24,29 @@ enum Gender: string implements GenderInterface
         return $this->value;
     }
 
-    public static function tryFromString(string $value, ?self $fallback = null): ?GenderInterface
+    public static function defaultMapping(): array
+    {
+        return [
+            // male
+            'male' => self::MALE,
+            'men' => self::MALE,
+            'männlich' => self::MALE,
+            'herr' => self::MALE,
+            // female
+            'female' => self::FEMALE,
+            'women' => self::FEMALE,
+            'weiblich' => self::FEMALE,
+            'w' => self::FEMALE,
+            'frau' => self::FEMALE,
+            // diverse
+            'other' => self::DIVERSE,
+            'diverse' => self::DIVERSE,
+            'divers' => self::DIVERSE,
+            'x' => self::DIVERSE,
+        ];
+    }
+
+    public static function tryFromString(string $value, ?self $fallback = null, ?array $mapping = null): ?GenderInterface
     {
         $value = strtolower(trim($value));
 
@@ -32,18 +54,8 @@ enum Gender: string implements GenderInterface
             return $result;
         }
 
-        if (in_array($value, ['male', 'männlich', 'herr'])) {
-            return self::MALE;
-        }
+        $mapping = $mapping ?? self::defaultMapping();
 
-        if (in_array($value, ['female', 'weiblich', 'frau'])) {
-            return self::FEMALE;
-        }
-
-        if (in_array($value, ['other', 'diverse', 'divers', 'x'])) {
-            return self::DIVERSE;
-        }
-
-        return $fallback;
+        return $mapping[$value] ?? $fallback;
     }
 }
