@@ -8,7 +8,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SalutationCreator
 {
-    public function generate(TranslatorInterface $translator, SalutationContext $context): string
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+    ) {}
+
+    public function generate(SalutationContext $context): string
     {
         $prefixTitleList = [];
         $suffixTitleList = [];
@@ -21,13 +25,14 @@ class SalutationCreator
             }
         }
 
-        $prefixTitles = $this->buildString($prefixTitleList, $translator);
-        $suffixTitles = $this->buildString($suffixTitleList, $translator);
+        $prefixTitles = $this->buildString($prefixTitleList);
+        $suffixTitles = $this->buildString($suffixTitleList);
 
         $parameters = [
             '%prefix_titles%' => $prefixTitles,
             '%suffix_titles%' => $suffixTitles,
-            '%gender%' => $context->getGender()->build()->trans($translator),
+            '%gender_name%' => $context->getGender()->build()->trans($this->translator),
+            '%gender%' => $context->getGender()->value,
             '%name%' => $context->getName()->getFullName(),
             '%formal_name%' => $context->getName()->getFormalName(),
             '%given_name%' => $context->getName()->getGivenName(),
@@ -41,14 +46,14 @@ class SalutationCreator
 
     }
 
-    private function buildString(array $array, TranslatorInterface $translator): string
+    private function buildString(array $array): string
     {
         $string = '';
-        array_walk_recursive($array, function ($value) use (&$string, $translator) {
+        array_walk_recursive($array, function ($value) use (&$string) {
             /**
              * @var AbstractTitle $value
              */
-            $string .= $value->build()->trans($translator);
+            $string .= $value->build()->trans($this->translator);
         });
 
         return $string;

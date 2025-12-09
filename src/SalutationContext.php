@@ -8,7 +8,7 @@ use HeimrichHannot\SalutationCreator\Context\Title\AbstractTitle;
 
 class SalutationContext
 {
-    public const TRANSLATION_DEFAULT_FORMAT_KEY = 'format';
+    public const TRANSLATION_DEFAULT_FORMAT_KEY = 'format.formal';
     public const TRANSLATION_DEFAULT_DOMAIN = 'salutation_creator';
 
     /**

@@ -1,0 +1,7 @@
+format.formel: >
+  {gender, select,
+    m {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+    w {Sehr geehrte {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+    other {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+  }
+format.informal: 'Hallo {given_name}'
