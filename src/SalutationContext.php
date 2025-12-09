@@ -56,6 +56,8 @@ class SalutationContext
     public function setGender(GenderInterface $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
     }
 
     public function getGender(): GenderInterface
