@@ -33,9 +33,9 @@ class SalutationCreator
             '%suffix_titles%' => $suffixTitles,
             '%gender_name%' => $context->getGender()->build()->trans($this->translator),
             '%gender%' => $context->getGender()->getKey(),
-            '%name%' => $context->getName()->getFullName(),
-            '%formal_name%' => $context->getName()->getFormalName(),
-            '%given_name%' => $context->getName()->getGivenName(),
+            '%name%' => $context->getName()?->getFullName() ?? '',
+            '%formal_name%' => $context->getName()?->getFormalName() ?? '',
+            '%given_name%' => $context->getName()?->getGivenName() ?? '',
         ];
 
         return trim($this->translator->trans(
@@ -46,12 +46,16 @@ class SalutationCreator
 
     }
 
+    /**
+     * @param array<SalutationPartInterface|array<SalutationPartInterface>> $array
+     * @return string
+     */
     private function buildString(array $array): string
     {
         $string = '';
         array_walk_recursive($array, function ($value) use (&$string) {
             /**
-             * @var AbstractTitle $value
+             * @var SalutationPartInterface $value
              */
             $string .= $value->build()->trans($this->translator);
         });

@@ -1,10 +1,5 @@
 parameters:
-  level: 1
+  level: 10
+  treatPhpDocTypesAsCertain: false
   paths:
     - src
-#    - contao
-#  universalObjectCratesClasses:
-#    - Contao\Model
-#    - Contao\Template
-includes:
-  - vendor/phpstan/phpstan-symfony/extension.neon

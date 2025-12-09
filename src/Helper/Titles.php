@@ -9,6 +9,9 @@ use HeimrichHannot\SalutationCreator\Context\Title\SuffixTitle;
 
 class Titles
 {
+    /**
+     * @return array<string, array{0: class-string<AbstractTitle>, 1?: non-empty-list<string>}>
+     */
     public static function defaultMapping(): array
     {
         return [
@@ -29,7 +32,7 @@ class Titles
 
     /**
      * @param string $value
-     * @param array|null $mapping Override the default string title mapping
+     * @param array<string, array{0: class-string<AbstractTitle>, 1?: non-empty-list<string>}>|null $mapping Override the default string title mapping
      * @return AbstractTitle[]
      */
     public static function fromString(string $value, ?array $mapping = null): array
@@ -54,7 +57,9 @@ class Titles
                 continue;
             }
 
-            $titles[] = new $mapping[$key][0](...($mapping[$key][1] ?? []));
+            /** @var AbstractTitle $title */
+            $title = new $mapping[$key][0](...($mapping[$key][1] ?? []));
+            $titles[] = $title;
         }
 
         return $titles;

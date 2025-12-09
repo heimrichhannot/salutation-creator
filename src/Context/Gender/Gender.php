@@ -24,6 +24,9 @@ enum Gender: string implements GenderInterface
         return $this->value;
     }
 
+    /**
+     * @return array<string, GenderInterface>
+     */
     public static function defaultMapping(): array
     {
         return [
@@ -46,6 +49,9 @@ enum Gender: string implements GenderInterface
         ];
     }
 
+    /**
+     * @param array<string, GenderInterface>|null $mapping
+     */
     public static function tryFromString(string $value, ?self $fallback = null, ?array $mapping = null): ?GenderInterface
     {
         $value = strtolower(trim($value));

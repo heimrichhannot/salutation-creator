@@ -42,6 +42,10 @@ class SalutationContext
         return $this;
     }
 
+    /**
+     * @param AbstractTitle[] $titles
+     * @return $this
+     */
     public function addTitles(array $titles): self
     {
         foreach ($titles as $title) {

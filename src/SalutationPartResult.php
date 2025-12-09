@@ -7,6 +7,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class SalutationPartResult implements TranslatableInterface, \Stringable
 {
+    /**
+     * @param array<string,string|int|TranslatableInterface> $parameters
+     */
     public function __construct(
         private string  $message,
         private array   $parameters = [],
@@ -25,6 +28,9 @@ readonly class SalutationPartResult implements TranslatableInterface, \Stringabl
         return $this->message;
     }
 
+    /**
+     * @return array<string,string|int|TranslatableInterface>
+     */
     public function getParameters(): array
     {
         return $this->parameters;
