@@ -4,7 +4,6 @@ namespace HeimrichHannot\SalutationCreator\Context\Title;
 
 use HeimrichHannot\SalutationCreator\Context\Position;
 use HeimrichHannot\SalutationCreator\SalutationPartResult;
-use Symfony\Contracts\Translation\TranslatableInterface;
 
 class GermanDoctorTitle extends AbstractTitle
 {

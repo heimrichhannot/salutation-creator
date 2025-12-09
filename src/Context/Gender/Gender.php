@@ -54,7 +54,7 @@ enum Gender: string implements GenderInterface
             return $result;
         }
 
-        $mapping = $mapping ?? self::defaultMapping();
+        $mapping ??= self::defaultMapping();
 
         return $mapping[$value] ?? $fallback;
     }

@@ -38,7 +38,7 @@ class Titles
             return [];
         }
 
-        $mapping = $mapping ?? self::defaultMapping();
+        $mapping ??= self::defaultMapping();
 
         $tokens = preg_split('/\s+/', trim($value)) ?: [];
         $titles = [];

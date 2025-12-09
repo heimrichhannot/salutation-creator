@@ -2,8 +2,6 @@
 
 namespace HeimrichHannot\SalutationCreator\Context\Name;
 
-use HeimrichHannot\SalutationCreator\SalutationPartResult;
-
 class GermanTypeName extends AbstractName
 {
     public function __construct(

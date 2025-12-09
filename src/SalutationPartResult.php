@@ -5,7 +5,7 @@ namespace HeimrichHannot\SalutationCreator;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-readonly class SalutationPartResult implements TranslatableInterface
+readonly class SalutationPartResult implements TranslatableInterface, \Stringable
 {
     public function __construct(
         private string  $message,
