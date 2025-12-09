@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "symfony/translation-contracts": "^1 || ^2 || ^3"
     },
     "autoload": {
