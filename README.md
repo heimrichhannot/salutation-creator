@@ -1,6 +1,9 @@
 # Salutation Creator
 
-A PHP library for creating personalized salutations for different contexts (formal/informal) with support for titles, gender, and multilingual translations.
+![](https://img.shields.io/badge/PHPStan-level%2010-brightgreen.svg?style=flat)
+
+
+A PHP library for creating personalized salutations for different contexts with support for titles, gender, and multilingual translations.
 
 ## Installation
 
@@ -24,7 +27,7 @@ composer require heimrichhannot/salutation-creator
 
 ## Basic Usage
 
-### Simple Formal Salutation
+Basic example:
 
 ```php
 use HeimrichHannot\SalutationCreator\SalutationCreator;
@@ -42,23 +45,29 @@ echo $salutationCreator->generate($context);
 // Output: "Sehr geehrter Herr Mustermann"
 ```
 
-### With Academic Titles
+With (academic) Titles:
 
 ```php
 use HeimrichHannot\SalutationCreator\Context\Title\GermanDoctorTitle;
 use HeimrichHannot\SalutationCreator\Context\Title\GermanProfessorTitle;
+use HeimrichHannot\SalutationCreator\Context\Title\PrefixTitle;
+use HeimrichHannot\SalutationCreator\Helper\Titles;
 
 $context = (new SalutationContext())
     ->setName(new GermanTypeName('Anna', 'Schmidt'))
     ->setGender(Gender::FEMALE)
     ->addTitle(new GermanDoctorTitle())
-    ->addTitle(new GermanProfessorTitle());
+    ->addTitle(new GermanProfessorTitle())
+    ->addTitle(new PrefixTitle('Hero')
+    ->addTitles(Titles::fromString('dr phd unknown')); // Adding titles from string
+    ;
+    
 
 echo $salutationCreator->generate($context);
-// Output: "Sehr geehrte Frau Prof. Dr. Schmidt"
+// Output: "Sehr geehrte Frau Prof. Dr. Hero Dr. Schmidt PhD."
 ```
 
-### Informal Salutation
+Custom translation key (e.g. informal salutation):
 
 ```php
 $context = (new SalutationContext())
@@ -67,6 +76,27 @@ $context = (new SalutationContext())
 
 echo $salutationCreator->generate($context);
 // Output: "Hallo Lisa"
+```
+
+Gender from string:
+
+```php
+use HeimrichHannot\SalutationCreator\SalutationCreator;
+use HeimrichHannot\SalutationCreator\SalutationContext;
+use HeimrichHannot\SalutationCreator\Context\Gender\Gender;
+
+$data = [
+    'firstname' => 'Lisa',
+    'lastname' => 'Müller',
+    'gender' => 'female',
+];
+
+$salutationContext = (new SalutationContext())
+    ->setName(new GermanTypeName($data['firstname'], $data['lastname']))
+    ->addTitles(Gender::tryFromString($data['gender'])));
+
+echo (new SalutationCreator($this->translator))->generate($salutationContext);
+// Outputs "Sehr geehrte Frau Müller"
 ```
 
 ## Symfony Integration
