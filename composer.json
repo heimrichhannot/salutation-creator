@@ -2,7 +2,6 @@
     "name": "heimrichhannot/salutation-creator",
     "description": "A php library to create salutations.",
     "license": "GPL-3.0-or-later",
-    "version": "0.1.0-dev",
     "authors": [
         {
             "name": "Thomas Körner",
