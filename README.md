@@ -99,9 +99,12 @@ echo (new SalutationCreator($this->translator))->generate($salutationContext);
 // Outputs "Sehr geehrte Frau Müller"
 ```
 
-## Symfony Integration
+## Translations / Translation files
 
-### Register Translation Files
+Since this library in framework-agnostic, you need to register the translation files manually or copy them to your project's translation directory.
+You'll find translation files in the symfony translation ICU format in the `translations` directory of this package.
+
+### Register Translation Files with Symfony
 
 In your `config/packages/framework.yaml`:
 
@@ -139,7 +142,55 @@ class MessageController
 }
 ```
 
-## Available Classes
+### Custom Translations
+
+Create a translation file `translations/salutation_creator+intl-icu.{locale}.yaml`:
+
+```yaml
+format.formal: >
+  {gender, select,
+    m {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+    w {Sehr geehrte {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+    nb {Sehr geehrte*r {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+    other {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+  }
+format.informal: 'Hallo {given_name}'
+
+gender.m: 'Herr'
+gender.f: 'Frau'
+gender.d: ''
+gender.nb: ''
+
+title.german_doctor: 'Dr.'
+title.german_professor: 'Prof.'
+```
+
+**Note:** The example and the bundles translation files follow the [Symfony ICU MessageFormat](https://symfony.com/doc/current/translation/message_format.html), 
+which supports the `select` syntax for conditional translations based on variables like gender. This allows for flexible, gender-sensitive formatting.
+
+### Use custom translation keys and domain
+
+```php
+$context->setTranslationConfig(
+    formatKey: 'my_custom.format',
+    domain: 'my_domain'
+);
+```
+
+### Available format parameters
+
+The following parameters are available in translations:
+
+- `%prefix_titles%` - All titles before the name
+- `%suffix_titles%` - All titles after the name
+- `%gender_name%` - Gender designation (Mr./Ms.)
+- `%gender%` - Gender abbreviation (m/f/d)
+- `%name%` - Full name
+- `%formal_name%` - Formal name (usually last name)
+- `%given_name%` - First name
+
+
+## Available (bundled) Classes
 
 ### Name Classes
 
@@ -237,7 +288,7 @@ class CustomTitle extends AbstractTitle
 ```php
 use HeimrichHannot\SalutationCreator\Context\Name\AbstractName;
 
-class CustomName extends AbstractName
+class IcelandTypeName extends AbstractName
 {
     public function __construct(
         private readonly string $firstName,
@@ -251,7 +302,7 @@ class CustomName extends AbstractName
 
     public function getFormalName(): string
     {
-        return $this->lastName;
+        return $this->firstName;
     }
 
     public function getGivenName(): string
@@ -260,49 +311,3 @@ class CustomName extends AbstractName
     }
 }
 ```
-
-### Custom Translations
-
-Create a translation file `translations/salutation_creator+intl-icu.{locale}.yaml`:
-
-```yaml
-format.formal: >
-  {gender, select,
-    m {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-    w {Sehr geehrte {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-    nb {Sehr geehrte*r {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-    other {Sehr geehrter {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-  }
-format.informal: 'Hallo {given_name}'
-
-gender.m: 'Herr'
-gender.f: 'Frau'
-gender.d: ''
-gender.nb: ''
-
-title.german_doctor: 'Dr.'
-title.german_professor: 'Prof.'
-```
-
-**Note:** Translations follow the [Symfony ICU MessageFormat](https://symfony.com/doc/current/translation/message_format.html), which supports the `select` syntax for conditional translations based on variables like gender. This allows for flexible, gender-sensitive formatting.
-
-### Use Custom Translation Domain
-
-```php
-$context->setTranslationConfig(
-    formatKey: 'my_custom.format',
-    domain: 'my_domain'
-);
-```
-
-## Available Parameters
-
-The following parameters are available in translations:
-
-- `%prefix_titles%` - All titles before the name
-- `%suffix_titles%` - All titles after the name
-- `%gender_name%` - Gender designation (Mr./Ms.)
-- `%gender%` - Gender abbreviation (m/f/d)
-- `%name%` - Full name
-- `%formal_name%` - Formal name (usually last name)
-- `%given_name%` - First name
