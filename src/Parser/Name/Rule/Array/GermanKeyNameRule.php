@@ -4,9 +4,10 @@ namespace HeimrichHannot\SalutationCreator\Parser\Name\Rule\Array;
 
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\Result;
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\RowValue;
+use HeimrichHannot\SalutationCreator\Parser\Name\Rule\RuleInterface;
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\Value;
 
-class GermanKeyNameRule
+class GermanKeyNameRule implements RuleInterface
 {
     public function apply(Value $value): Result
     {

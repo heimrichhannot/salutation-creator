@@ -28,7 +28,9 @@ class StringParser extends AbstractParser
         }
 
         $parts = preg_split('/\s+/u', $name, -1, PREG_SPLIT_NO_EMPTY);
-        $count = count($parts);
+        if (false === $parts || ($count = count($parts)) === 0) {
+            return null;
+        }
 
         if ($count === 1) {
             return $this->buildNameFromResult(new Result(true, '', $parts[0]));

@@ -12,6 +12,9 @@ use HeimrichHannot\SalutationCreator\Parser\Name\Rule\RuleInterface;
 
 class ArrayParser extends AbstractParser
 {
+    /**
+     * @param array<mixed, mixed> $data
+     */
     public function parse(array $data): ?AbstractName
     {
         $result = new Result(false);
@@ -32,7 +35,7 @@ class ArrayParser extends AbstractParser
     }
 
     /**
-     * @param string $format
+     * @param class-string<AbstractName> $format
      * @return class-string<RuleInterface>[]
      */
     public static function defaultRules(string $format): array

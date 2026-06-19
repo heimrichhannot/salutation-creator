@@ -8,7 +8,7 @@ class RowValue extends Value
     public string $normalizedKey;
 
     public function __construct(
-        mixed $key,
+        string|int $key,
         mixed $value
     ) {
         parent::__construct($value);

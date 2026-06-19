@@ -11,12 +11,12 @@ abstract class AbstractParser
 {
     private bool $allowIncomplete = false;
 
-    public function __construct(
-        /**
-         * @var class-string<RuleInterface>[]
-         */
+    /**
+     * @param class-string<RuleInterface>[] $rules
+     * @param class-string<AbstractName> $format
+     */
+    final public function __construct(
         protected array $rules,
-        /** @var class-string<AbstractName> */
         protected string $format,
     ) {
         if (!(is_a($this->format, AbstractName::class, true))) {
@@ -24,6 +24,9 @@ abstract class AbstractParser
         }
     }
 
+    /**
+     * @param class-string<AbstractName> $format
+     */
     public static function create(string $format): static
     {
         static::validateFormat($format);
@@ -64,5 +67,8 @@ abstract class AbstractParser
         return $name;
     }
 
+    /**
+     * @return class-string<RuleInterface>[]
+     */
     abstract public static function defaultRules(string $format): array;
 }
