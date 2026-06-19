@@ -5,8 +5,8 @@ namespace HeimrichHannot\SalutationCreator\Context\Name;
 class GermanTypeName extends AbstractName
 {
     public function __construct(
-        private readonly string $firstName,
-        private readonly string $lastName,
+        public string $firstName,
+        public string $lastName,
     ) {
     }
 
