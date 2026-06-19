@@ -235,6 +235,7 @@ The following parameters are available in translations:
 - `%name%` - Full name
 - `%formal_name%` - Formal name (usually last name)
 - `%given_name%` - First name
+- `%has_name%` - Containing yes if a name is available, otherwise no. Can be used for conditional translations based on the presence of a name.
 
 
 ## Available (bundled) Classes

@@ -1,8 +1,11 @@
 format.formal: >
-  {gender, select,
-    m {Dear {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-    f {Dear {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
-    other {Dear {prefix_titles} {name} {suffix_titles}}
+  {has_name, select,
+    yes {{gender, select,
+      m {Dear {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+      f {Dear {gender_name} {prefix_titles} {formal_name} {suffix_titles}}
+      other {Dear {prefix_titles} {name} {suffix_titles}}
+    }}
+    other {Dear Sir or Madam}
   }
 format.informal: 'Hello {given_name}'
 

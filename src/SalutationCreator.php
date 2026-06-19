@@ -35,6 +35,7 @@ class SalutationCreator
             '%name%' => $context->getName()?->getFullName() ?? '',
             '%formal_name%' => $context->getName()?->getFormalName() ?? '',
             '%given_name%' => $context->getName()?->getGivenName() ?? '',
+            '%has_name%' => $context->getName() === null ? 'no' : 'yes',
         ];
 
         return trim($this->translator->trans(
