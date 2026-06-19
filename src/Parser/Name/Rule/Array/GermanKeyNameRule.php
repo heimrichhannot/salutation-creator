@@ -3,7 +3,6 @@
 namespace HeimrichHannot\SalutationCreator\Parser\Name\Rule\Array;
 
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\Result;
-use HeimrichHannot\SalutationCreator\Parser\Name\ValueObject\ArrayRow;
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\RowValue;
 use HeimrichHannot\SalutationCreator\Parser\Name\Rule\Value;
 

@@ -23,7 +23,7 @@ class StringParser extends AbstractParser
         }
 
         if (str_contains($name, ',')) {
-            [$lastName, $firstName] = array_map('trim', explode(',', $name, 2));
+            [$lastName, $firstName] = array_map(trim(...), explode(',', $name, 2));
             return $this->buildNameFromResult(new Result(true, $firstName, $lastName));
         }
 
