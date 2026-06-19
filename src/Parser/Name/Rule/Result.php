@@ -22,7 +22,7 @@ class Result
             true,
             '' !== $result->firstName ? $result->firstName : $this->firstName,
             '' !== $result->lastName ? $result->lastName : $this->lastName,
-            $this->origin // oder $result->origin, je nach gewünschter Semantik
+            $result->origin
         );
     }
 
