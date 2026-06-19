@@ -13,7 +13,7 @@ composer require heimrichhannot/salutation-creator
 
 ## Requirements
 
-- PHP ^8.1
+- PHP ^8.2
 - symfony/translation-contracts ^1 || ^2 || ^3
 
 ## Features
@@ -22,6 +22,7 @@ composer require heimrichhannot/salutation-creator
 - ✅ Support for academic titles (Dr., Prof., etc.)
 - ✅ Gender-sensitive salutations
 - ✅ Prefix and suffix titles with priorities
+- ✅ Name parsing from strings and arrays
 - ✅ Multilingual translations via Symfony Translation
 - ✅ Extensible with custom name, gender, and title classes
 
@@ -58,9 +59,8 @@ $context = (new SalutationContext())
     ->setGender(Gender::FEMALE)
     ->addTitle(new GermanDoctorTitle())
     ->addTitle(new GermanProfessorTitle())
-    ->addTitle(new PrefixTitle('Hero')
+    ->addTitle(new PrefixTitle('Hero'))
     ->addTitles(Titles::fromString('dr phd unknown')); // Adding titles from string
-    ;
     
 
 echo $salutationCreator->generate($context);
@@ -84,6 +84,7 @@ Gender from string:
 use HeimrichHannot\SalutationCreator\SalutationCreator;
 use HeimrichHannot\SalutationCreator\SalutationContext;
 use HeimrichHannot\SalutationCreator\Context\Gender\Gender;
+use HeimrichHannot\SalutationCreator\Context\Name\GermanTypeName;
 
 $data = [
     'firstname' => 'Lisa',
@@ -93,11 +94,57 @@ $data = [
 
 $salutationContext = (new SalutationContext())
     ->setName(new GermanTypeName($data['firstname'], $data['lastname']))
-    ->addTitles(Gender::tryFromString($data['gender'])));
+    ->setGender(Gender::tryFromString($data['gender']));
 
 echo (new SalutationCreator($this->translator))->generate($salutationContext);
 // Outputs "Sehr geehrte Frau Müller"
 ```
+
+## Name Parsing
+
+Use the bundled name parsers to create `AbstractName` instances from strings or arrays before passing them to a `SalutationContext`.
+
+### Parse a name string
+
+```php
+use HeimrichHannot\SalutationCreator\Context\Name\GermanTypeName;
+use HeimrichHannot\SalutationCreator\Parser\Name\StringParser;
+
+$name = StringParser::create(GermanTypeName::class)->parse('Max Mustermann');
+
+echo $name?->getFullName();
+// Output: "Max Mustermann"
+```
+
+The string parser supports common formats such as `Max Mustermann` and `Mustermann, Max`. For single-part names, parsing returns `null` by default because the result is incomplete.
+
+If incomplete names are acceptable for your use case, enable them explicitly:
+
+```php
+$name = StringParser::create(GermanTypeName::class)
+    ->allowIncomplete(true)
+    ->parse('Mustermann');
+
+echo $name?->getFormalName();
+// Output: "Mustermann"
+```
+
+### Parse name data from arrays
+
+```php
+use HeimrichHannot\SalutationCreator\Context\Name\GermanTypeName;
+use HeimrichHannot\SalutationCreator\Parser\Name\ArrayParser;
+
+$name = ArrayParser::create(GermanTypeName::class)->parse([
+    'firstname' => 'Max',
+    'lastname' => 'Mustermann',
+]);
+
+echo $name?->getFullName();
+// Output: "Max Mustermann"
+```
+
+For `GermanTypeName`, the array parser supports English keys (`firstname`, `lastname`, `name`) and German keys (`vorname`, `nachname`, `zuname`, `name`). Non-string values are ignored.
 
 ## Translations / Translation files
 
@@ -195,6 +242,11 @@ The following parameters are available in translations:
 ### Name Classes
 
 - `GermanTypeName`: German names with first and last name
+
+### Name Parser Classes
+
+- `StringParser`: Parses full names from plain strings
+- `ArrayParser`: Parses first and last names from array data
 
 ### Gender
 
