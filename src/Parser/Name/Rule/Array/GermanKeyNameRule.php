@@ -11,7 +11,7 @@ class GermanKeyNameRule implements RuleInterface
 {
     public function apply(Value $value): Result
     {
-        if (!($value instanceof RowValue)) {
+        if (!$value instanceof RowValue) {
             return new Result(false);
         }
 

@@ -13,7 +13,7 @@ enum Gender: string implements GenderInterface
     public function build(): SalutationPartResult
     {
         return new SalutationPartResult(
-            'gender.' . $this->value,
+            'gender.'.$this->value,
             domain: 'salutation_creator',
             fallback: ucfirst($this->value),
         );

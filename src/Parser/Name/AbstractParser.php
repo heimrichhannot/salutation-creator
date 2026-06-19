@@ -13,13 +13,13 @@ abstract class AbstractParser
 
     /**
      * @param class-string<RuleInterface>[] $rules
-     * @param class-string<AbstractName> $format
+     * @param class-string<AbstractName>    $format
      */
     final public function __construct(
         protected array $rules,
         protected string $format,
     ) {
-        if (!(is_a($this->format, AbstractName::class, true))) {
+        if (!is_a($this->format, AbstractName::class, true)) {
             throw new \InvalidArgumentException(sprintf('Format class "%s" does not exist or is not a subclass of "%s".', $this->format, AbstractName::class));
         }
     }
@@ -33,12 +33,14 @@ abstract class AbstractParser
         $rules = static::defaultRules($format);
 
         $instance = new static($rules, $format);
+
         return $instance;
     }
 
     public function allowIncomplete(bool $allow): static
     {
         $this->allowIncomplete = $allow;
+
         return $this;
     }
 

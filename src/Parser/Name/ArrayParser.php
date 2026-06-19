@@ -21,10 +21,10 @@ class ArrayParser extends AbstractParser
         foreach ($data as $key => $value) {
             $entry = new RowValue($key, $value);
             foreach ($this->rules as $rule) {
-                if (!(is_a($rule, RuleInterface::class, true))) {
+                if (!is_a($rule, RuleInterface::class, true)) {
                     continue;
                 }
-                $result->with((new $rule)->apply($entry));
+                $result->with((new $rule())->apply($entry));
                 if ($result->isComplete()) {
                     break 2;
                 }
@@ -36,6 +36,7 @@ class ArrayParser extends AbstractParser
 
     /**
      * @param class-string<AbstractName> $format
+     *
      * @return class-string<RuleInterface>[]
      */
     public static function defaultRules(string $format): array

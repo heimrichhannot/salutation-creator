@@ -12,7 +12,7 @@ class GermanTypeName extends AbstractName
 
     public function getFullName(): string
     {
-        return $this->firstName . ' ' . $this->lastName;
+        return $this->firstName.' '.$this->lastName;
     }
 
     public function getFormalName(): string

@@ -20,9 +20,8 @@ class SalutationCreator
             if (Position::PREFIX === $title->getPosition()) {
                 $prefixTitleList[$title->getPriority()][] = $title;
                 continue;
-            } else {
-                $suffixTitleList[$title->getPriority()][] = $title;
             }
+            $suffixTitleList[$title->getPriority()][] = $title;
         }
 
         $prefixTitles = $this->buildString($prefixTitleList);
@@ -52,9 +51,7 @@ class SalutationCreator
     {
         $string = '';
         array_walk_recursive($array, function ($value) use (&$string) {
-            /**
-             * @var SalutationPartInterface $value
-             */
+            /** @var SalutationPartInterface $value */
             $string .= $value->build()->trans($this->translator);
         });
 

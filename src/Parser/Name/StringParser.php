@@ -24,6 +24,7 @@ class StringParser extends AbstractParser
 
         if (str_contains($name, ',')) {
             [$lastName, $firstName] = array_map(trim(...), explode(',', $name, 2));
+
             return $this->buildNameFromResult(new Result(true, $firstName, $lastName));
         }
 
@@ -32,11 +33,11 @@ class StringParser extends AbstractParser
             return null;
         }
 
-        if ($count === 1) {
+        if (1 === $count) {
             return $this->buildNameFromResult(new Result(true, '', $parts[0]));
         }
 
-        if ($count === 2) {
+        if (2 === $count) {
             return $this->buildNameFromResult(new Result(true, $parts[0], $parts[1]));
         }
 
@@ -71,7 +72,7 @@ class StringParser extends AbstractParser
             $lastNameStartIndex > 0
             && in_array(mb_strtolower($parts[$lastNameStartIndex - 1]), $surnamePrefixes, true)
         ) {
-            $lastNameStartIndex--;
+            --$lastNameStartIndex;
         }
 
         if ($lastNameStartIndex < $count - 1) {
@@ -86,6 +87,7 @@ class StringParser extends AbstractParser
 
         // at least we have only wild guessing :)
         $splitIndex = (int) ceil($count / 2);
+
         return $this->buildNameFromResult(
             new Result(
                 true,

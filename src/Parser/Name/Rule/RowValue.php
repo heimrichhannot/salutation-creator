@@ -9,7 +9,7 @@ class RowValue extends Value
 
     public function __construct(
         string|int $key,
-        mixed $value
+        mixed $value,
     ) {
         parent::__construct($value);
 
