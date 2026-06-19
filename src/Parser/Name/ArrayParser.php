@@ -24,7 +24,7 @@ class ArrayParser extends AbstractParser
                 if (!is_a($rule, RuleInterface::class, true)) {
                     continue;
                 }
-                $result->with((new $rule())->apply($entry));
+                $result = $result->with((new $rule())->apply($entry));
                 if ($result->isComplete()) {
                     break 2;
                 }

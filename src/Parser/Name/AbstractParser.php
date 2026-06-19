@@ -61,6 +61,9 @@ abstract class AbstractParser
             return null;
         }
 
+        /**
+         * @todo We need to abstract the naming even more
+         */
         /** @var GermanTypeName $name */
         $name = new ($this->format)();
         $name->firstName = $result->firstName;
