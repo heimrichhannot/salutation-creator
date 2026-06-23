@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2026-06-23
+- Changed: uppercase first letter in string parser german and english parser rules
+- Fixed: title string parser
+
 ## [0.1.4] - 2026-06-19
 - Added: has_name translation parameter including default translations if no name is present 
 

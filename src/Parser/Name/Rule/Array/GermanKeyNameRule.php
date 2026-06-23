@@ -20,10 +20,10 @@ class GermanKeyNameRule implements RuleInterface
         }
 
         if (in_array($value->normalizedKey, ['vorname'])) {
-            return new Result(true, firstName: $value->originalValue, origin: $value);
+            return new Result(true, firstName: ucfirst($value->originalValue), origin: $value);
         }
         if (in_array($value->normalizedKey, ['nachname', 'zuname', 'name'])) {
-            return new Result(true, lastName: $value->originalValue, origin: $value);
+            return new Result(true, lastName: ucfirst($value->originalValue), origin: $value);
         }
 
         return new Result(false);

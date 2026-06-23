@@ -20,10 +20,10 @@ class EnglishKeyNameRule implements RuleInterface
         }
 
         if ('firstname' === $value->normalizedKey) {
-            return new Result(true, firstName: $value->originalValue, origin: $value);
+            return new Result(true, firstName: ucfirst($value->originalValue), origin: $value);
         }
         if (\in_array($value->normalizedKey, ['lastname', 'name'])) {
-            return new Result(true, lastName: $value->originalValue, origin: $value);
+            return new Result(true, lastName: ucfirst($value->originalValue), origin: $value);
         }
 
         return new Result(false);

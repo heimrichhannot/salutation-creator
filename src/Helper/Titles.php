@@ -53,7 +53,7 @@ class Titles
                 continue;
             }
 
-            if (!isset($mapping[$key][0]) || !($mapping[$key][0] instanceof AbstractTitle)) {
+            if (!isset($mapping[$key][0]) || !is_a($mapping[$key][0], AbstractTitle::class, true)) {
                 continue;
             }
 
